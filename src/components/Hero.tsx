@@ -133,6 +133,8 @@ const Hero: React.FC = () => {
           animate="visible"
         >
           Everything I've been working on lately...
+          <br />
+          (This site is a work in progress)
         </motion.p>
         
         <div className={styles.buttonRow}>

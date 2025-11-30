@@ -18,7 +18,7 @@ const FooterLinks: React.FC = () => {
         ease: "easeOut",
       },
     },
-  };
+  } as any;
 
   return (
     <motion.footer

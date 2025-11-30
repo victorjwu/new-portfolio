@@ -17,7 +17,7 @@ const SoftwarePage: React.FC = () => {
         ease: "easeOut",
       },
     },
-  };
+  } as any;
 
   return (
     <motion.div

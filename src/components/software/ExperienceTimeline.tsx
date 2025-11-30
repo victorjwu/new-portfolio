@@ -54,7 +54,7 @@ const ExperienceTimeline: React.FC = () => {
       x: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  };
+  } as any;
 
   return (
     <section className={styles.section}>

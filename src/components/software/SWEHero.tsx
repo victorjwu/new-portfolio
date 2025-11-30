@@ -17,7 +17,7 @@ const SWEHero: React.FC = () => {
         staggerChildren: 0.1,
       },
     },
-  };
+  } as any;
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -26,7 +26,7 @@ const SWEHero: React.FC = () => {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  };
+  } as any;
 
   return (
     <motion.section
