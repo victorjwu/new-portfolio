@@ -1,11 +1,13 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hero from './components/Hero';
+import BubbleCursor from './components/BubbleCursor';
 import './styles/global.css';
 
 function App() {
   return (
     <Router>
+      <BubbleCursor />
       <Routes>
         <Route path="/" element={<Hero />} />
         {/* 
