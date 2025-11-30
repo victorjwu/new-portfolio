@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from '../styles/Hero.module.css';
+import bgVideo from "../assets/stabalized background.mov";
 
 const VideoBackground: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -60,8 +61,7 @@ const VideoBackground: React.FC = () => {
         playsInline
         // Using a high-quality placeholder from Pexels (or similar)
         // This is a direct link to a sample video. 
-        src="src/assets/stabalized background.mov
-        "
+        src={bgVideo}
       />
       {/* Overlay is now handled in Hero.tsx for the reveal animation */}
     </div>

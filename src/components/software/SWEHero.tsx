@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/software/SWEHero.module.css';
+import profilePic from "../../assets/vjw-1-ps.jpg";
 
 const SWEHero: React.FC = () => {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const SWEHero: React.FC = () => {
       
     <motion.div className={styles.profilePic} variants={itemVariants}>
     <img
-        src="src/assets/vjw-1-ps.jpg"
+        src={profilePic}
         alt="Victor Wu"
         className={styles.profileImage}
     />
