@@ -4,10 +4,9 @@ import styles from '../../styles/software/FooterLinks.module.css';
 
 const FooterLinks: React.FC = () => {
   const links = [
-    { label: "Resume", href: "/resume.pdf" },
-    { label: "GitHub", href: "https://github.com/yourusername" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/yourprofile" },
-    { label: "Email", href: "mailto:your.email@example.com" },
+    { label: "Resume", href: "https://drive.google.com/file/d/1vLk173MkB2Lh3E6X2K-uF8LAL7K6fI9-/view?usp=sharing" },
+    { label: "GitHub", href: "https://github.com/victorjwu" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/victorjwuGT" },
   ];
 
   const containerVariants = {

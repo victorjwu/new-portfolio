@@ -11,22 +11,28 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: "Company Name",
-    role: "Senior Software Engineer",
-    period: "2022 - Present",
-    description: "Led development of scalable microservices architecture. Improved system performance by 40% through optimization.",
-  },
-  {
-    company: "Previous Company",
+    company: "Google",
     role: "Software Engineer",
-    period: "2020 - 2022",
-    description: "Built responsive web applications using React and TypeScript. Collaborated with design team on user experience.",
+    period: "December 2025 - Present",
+    description: "Building distributed infrastructure + review tooling for YouTube content evaluation.",
   },
   {
-    company: "Startup Inc",
-    role: "Junior Developer",
-    period: "2018 - 2020",
-    description: "Developed features for mobile and web platforms. Participated in agile development process.",
+    company: "Amazon Robotics",
+    role: "Software Development Engineer",
+    period: "July 2025 - December 2025",
+    description: "Developed real-time orchestration + observability logic for Vulcan Stow to support system-wide visibility and automation.",
+  },
+  {
+    company: "Amazon Robotics",
+    role: "Software Development Engineer Intern",
+    period: "May 2024 - August 2024",
+    description: "Built a React + AWS Lambda observability tool unifying multi-subsystem data pipelines within Vulcan Stow.",
+  },
+  {
+    company: "Amazon Robotics",
+    role: "Software Development Engineer Intern",
+    period: "May 2023 - August 2023",
+    description: "Developed Python tooling to replicate the Match algorithm offline for Vulcan Stow ",
   },
 ];
 

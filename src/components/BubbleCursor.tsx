@@ -18,6 +18,7 @@ const BubbleCursor: React.FC = () => {
     let dotY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
+      // Use clientX/Y which are viewport-relative and work with zoom
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
@@ -33,17 +34,19 @@ const BubbleCursor: React.FC = () => {
       dotX += (mouseX - dotX) * dotSpeed;
       dotY += (mouseY - dotY) * dotSpeed;
 
-      cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-      cursorDot.style.transform = `translate(${dotX}px, ${dotY}px)`;
+      // Use translate3d for better performance and proper positioning
+      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+      cursorDot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
 
       requestAnimationFrame(animate);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    animate();
+    const animationId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 

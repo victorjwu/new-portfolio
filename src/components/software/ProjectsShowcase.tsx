@@ -11,28 +11,16 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "E-Commerce Platform",
-    description: "Full-stack marketplace with real-time inventory management and payment processing.",
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    imageColor: "#1a1a2e",
+    title: "Microsoft ABAC-CoPilot",
+    description: "Trained an NLP model to translate natural language prompts into JSON Attribute-Based Access Control (ABAC) security policies.",
+    tags: ["React", "Python", "TensorFlow"],
+    imageColor: "#853ebeff",
   },
   {
-    title: "Analytics Dashboard",
-    description: "Data visualization platform for business intelligence with interactive charts.",
-    tags: ["TypeScript", "D3.js", "Express", "MongoDB"],
-    imageColor: "#16213e",
-  },
-  {
-    title: "Mobile Fitness App",
-    description: "Cross-platform fitness tracking application with social features.",
-    tags: ["React Native", "Firebase", "Redux"],
-    imageColor: "#0f3460",
-  },
-  {
-    title: "AI Content Generator",
-    description: "Machine learning powered tool for automated content creation and optimization.",
-    tags: ["Python", "TensorFlow", "FastAPI"],
-    imageColor: "#1a1a2e",
+    title: "mise",
+    description: "Building an application that applies sentiment analysis (DistilBERT) to Reddit threads and food blogs togenerate restaurant recommendations.",
+    tags: ["React", "Node.js", "PyTorch", "MongoDB"],
+    imageColor: "#c75bccff",
   },
 ];
 
@@ -58,7 +46,7 @@ const ProjectsShowcase: React.FC = () => {
 
   return (
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Selected Projects</h2>
+      <h2 className={styles.sectionTitle}>Projects</h2>
       
       <motion.div
         className={styles.grid}
