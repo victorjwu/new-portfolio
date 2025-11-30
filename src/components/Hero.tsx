@@ -1,9 +1,12 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import VideoBackground from './VideoBackground';
 import styles from '../styles/Hero.module.css';
 
 const Hero: React.FC = () => {
+  const navigate = useNavigate();
+  
   // 1. Name Container Animation (Slides up after rejoin)
   const nameContainerVariants: Variants = {
     hidden: { y: '15vh' }, // Start centered (compensating for padding-bottom)
@@ -91,7 +94,7 @@ const Hero: React.FC = () => {
   };
 
   const handleSWEClick = () => {
-    console.log("Navigating to Software Engineering...");
+    navigate('/software');
   };
 
   const handleCreativeClick = () => {

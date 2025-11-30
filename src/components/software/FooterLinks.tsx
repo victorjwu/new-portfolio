@@ -1,0 +1,53 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import styles from '../../styles/software/FooterLinks.module.css';
+
+const FooterLinks: React.FC = () => {
+  const links = [
+    { label: "Resume", href: "/resume.pdf" },
+    { label: "GitHub", href: "https://github.com/yourusername" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/yourprofile" },
+    { label: "Email", href: "mailto:your.email@example.com" },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <motion.footer
+      className={styles.footer}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      <div className={styles.links}>
+        {links.map((link, index) => (
+          <a
+            key={index}
+            href={link.href}
+            className={styles.link}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+      
+      <p className={styles.copyright}>
+        © {new Date().getFullYear()} Victor Wu
+      </p>
+    </motion.footer>
+  );
+};
+
+export default FooterLinks;
