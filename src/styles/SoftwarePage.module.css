@@ -31,6 +31,39 @@
   padding: 0 4rem;
 }
 
+.backButton {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--swe-border-color);
+  border-radius: 50px;
+  color: var(--swe-text-brown);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.backButton:hover {
+  background-color: var(--swe-text-brown);
+  color: var(--swe-bg-beige);
+  border-color: var(--swe-text-brown);
+  transform: translateX(-2px);
+}
+
+.backButton svg {
+  width: 18px;
+  height: 18px;
+}
+
+
 @media (max-width: 1024px) {
   .content {
     width: 100%;
