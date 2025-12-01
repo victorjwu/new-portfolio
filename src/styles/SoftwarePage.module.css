@@ -1,5 +1,50 @@
-.page {
+.pageContainer {
+  position: relative;
+  width: 100%;
   min-height: 100vh;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--swe-bg-beige);
+  overflow-x: hidden;
+  color: var(--swe-text-brown);
+  font-family: 'Inter', sans-serif;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 65%; /* Takes up right side of screen */
+  margin-left: 35%; /* Offset by header width */
+  padding-bottom: 6rem;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+  box-sizing: border-box;
+}
+
+.footerSection {
+  padding: 0 4rem;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 80px; /* Space for mobile header */
+  }
+
+  .section {
+    padding: 2rem;
+    min-height: auto;
+    margin-bottom: 4rem;
+  }
+  
+  .footerSection {
+    padding: 0 2rem;
+  }
 }

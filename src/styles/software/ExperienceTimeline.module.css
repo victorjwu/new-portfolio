@@ -1,114 +1,167 @@
-.section {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 80px 20px;
+.timelineContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1000px; /* Increased from 800px */
+  padding: 4rem 0;
 }
 
-.sectionTitle {
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 60px;
+.verticalLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: var(--swe-border-color);
+  transform: translateX(-50%);
+}
+
+.timelineItem {
+  position: relative;
+  width: 50%;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  margin-bottom: 2rem; /* Large spacing for parallax room */
+}
+
+.left {
+  left: 0;
   text-align: center;
 }
 
-.timeline {
-  position: relative;
-  padding-left: 40px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.item {
-  position: relative;
-  margin-bottom: 60px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.item:last-child {
-  margin-bottom: 0;
-}
-
-.node {
-  position: absolute;
-  left: -36px;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  z-index: 1;
+.right {
+  left: 50%;
+  text-align: center;
 }
 
 .content {
-  flex: 1;
+  background: var(--swe-card-bg);
+  padding: 2.5rem; /* Increased from 2.5rem */
+  border-radius: 2px;
+  box-shadow: var(--swe-shadow-soft);
+  border: 1px solid var(--swe-border-color);
+  border-top: 3px solid var(--swe-green-olive); /* Green accent */
+  transition: box-shadow 0.3s ease;
+}
+
+.content:hover {
+  box-shadow: var(--swe-shadow-hover);
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 4px;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+.left .header {
+  flex-direction: row-reverse;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #F0F0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--swe-text-brown);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.roleInfo {
+  display: flex;
+  flex-direction: column;
 }
 
 .role {
-  font-size: clamp(18px, 2.5vw, 22px);
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 0.02em;
-}
-
-.period {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.05em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--swe-text-brown);
+  margin: 0;
+  line-height: 1.2;
 }
 
 .company {
-  font-size: 16px;
+  font-size: 1rem;
+  color: var(--swe-text-light-brown);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 12px;
-  letter-spacing: 0.02em;
+  margin-top: 0.25rem;
+}
+
+.date {
+  font-size: 0.85rem;
+  color: var(--swe-text-light-brown);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .description {
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.5);
-  max-width: 600px;
+  font-size: 1rem;
+  color: var(--swe-text-brown);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.dot {
+  position: absolute;
+  top: 2.5rem;
+  width: 11px;
+  height: 11px;
+  background-color: var(--swe-bg-beige);
+  border: 2px solid var(--swe-text-brown);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.left .dot {
+  right: -6.5px;
+}
+
+.right .dot {
+  left: -6.5px;
+}
+
+.link {
+  color: var(--swe-text-brown);
+  text-decoration: none;
+  border-bottom: 1px solid var(--swe-text-light-brown);
+  transition: border-color 0.2s;
+}
+
+.link:hover {
+  border-bottom-color: var(--swe-text-brown);
 }
 
 @media (max-width: 768px) {
-  .section {
-    padding: 60px 20px;
+  .verticalLine {
+    left: 20px;
   }
-  
-  .timeline {
-    padding-left: 30px;
+
+  .timelineItem {
+    width: 100%;
+    left: 0;
+    padding-left: 3.5rem;
+    padding-right: 0;
+    text-align: left;
+    margin-bottom: 4rem;
   }
-  
-  .node {
-    left: -26px;
+
+  .left {
+    text-align: left;
   }
-  
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
+
+  .left .header {
+    flex-direction: row;
+  }
+
+  .left .dot, .right .dot {
+    left: 14.5px;
+    right: auto;
   }
 }

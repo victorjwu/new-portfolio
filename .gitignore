@@ -27,3 +27,5 @@ dist-ssr
 *.mov
 *.jpg
 *.png
+.vercel
+.env*.local

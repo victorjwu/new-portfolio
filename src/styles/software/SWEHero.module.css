@@ -1,119 +1,106 @@
-.hero {
+.heroSection {
+  width: 100%;
+  min-height: 80vh; /* Ensure it takes up vertical space */
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 80px 20px 60px;
-  max-width: 600px;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto; /* Center horizontally if container allows */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px; /* Limit width to help centering */
   margin: 0 auto;
-  position: relative;
 }
 
-.backButton {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px 12px;
-  transition: color 0.2s ease;
-  letter-spacing: 0.05em;
+.imageContainer {
+  margin-bottom: 3rem;
 }
 
-.backButton:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.profilePic {
-  width: 160px;      /* control size here */
-  height: 160px;
-  overflow: hidden;  /* ensures clean crop */
-  border-radius: 50%; /* make circular if desired */
-}
-
-/* this is the key part */
-.profileImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;        /* crop instead of stretch */
-  object-position: center;  /* where to crop from */
-}
-
-
-
-.placeholder {
-  width: 100%;
-  height: 100%;
+.profileImageWrapper img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #EAE8E4;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.4);
-  letter-spacing: 0.1em;
+  overflow: hidden;
+  border: 1px solid var(--swe-green-moss);
+  object-fit: cover;
+  object-position: 80% 20%;
+  transform: scale(1.25);
 }
 
-.name {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.9);
+.profileImagePlaceholder {
+  font-size: 2rem;
+  color: var(--swe-text-brown);
+  font-weight: 600;
+  opacity: 0.6;
 }
 
-.tagline {
-  font-size: clamp(16px, 2vw, 18px);
+.title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--swe-text-brown);
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--swe-text-light-brown);
+  margin: 0 0 2rem 0;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 32px;
-  letter-spacing: 0.02em;
+}
+
+.decorativeLine {
+  width: 60px;
+  height: 3px;
+  background-color: var(--swe-green-olive);
+  margin-bottom: 3rem;
 }
 
 .links {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 2.5rem;
   justify-content: center;
 }
 
 .link {
-  font-size: 14px;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--swe-text-brown);
+  text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: color 0.2s ease;
+  letter-spacing: 0.05em;
   position: relative;
+  padding-bottom: 2px;
+  transition: color 0.3s ease;
 }
 
 .link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 0;
+  bottom: 0;
+  left: 50%;
   width: 0;
   height: 1px;
-  background: rgba(255, 255, 255, 0.8);
-  transition: width 0.3s ease;
+  background-color: var(--swe-green-olive);
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .link:hover {
-  color: rgba(255, 255, 255, 1);
+  color: var(--swe-green-olive);
 }
 
 .link:hover::after {
   width: 100%;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    padding: 60px 20px 40px;
-  }
-  
-  .links {
-    gap: 16px;
-  }
+  left: 0;
 }

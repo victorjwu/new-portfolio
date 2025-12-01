@@ -1,4 +1,5 @@
 /* src/styles/global.css */
+@import './software/theme.css';
 :root {
   --font-main: "Test Söhne", "Söhne", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
   --color-bg: #050505;

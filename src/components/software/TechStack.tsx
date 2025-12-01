@@ -1,76 +1,74 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from '../../styles/software/TechStack.module.css';
 
-interface SkillCategory {
-  category: string;
-  skills: string[];
+interface TechGroup {
+  name: string;
+  items: string[];
 }
 
-const skillCategories: SkillCategory[] = [
+const techGroups: TechGroup[] = [
   {
-    category: "Languages",
-    skills: ["Python", "Typescript", "JavaScript", "C++", "Kotlin"],
+    name: 'Languages',
+    items: ['Python', 'Java', 'C++', 'TypeScript', 'JavaScript', 'Kotlin']
   },
   {
-    category: "Frontend",
-    skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+    name: 'Frontend',
+    items: ['React', 'Next.js', 'Framer Motion', 'HTML/CSS', 'Tailwind']
   },
   {
-    category: "Backend",
-    skills: ["Node.js", "Express", "AWS", "SQL", "Firebase", "Linux"],
+    name: 'Backend',
+    items: ['Node.js', 'Express', 'SQL', 'AWS' ]
   },
   {
-    category: "ML/AI",
-    skills: ["TensorFlow", "PyTorch", "Huggingface", "Sentiment Analysis (BERT, DistilBERT)"]
-  },
+    name: 'ML/AI',
+    items: ['PyTorch', 'TensorFlow', 'Sentiment Analysis (BERT, DistilBERT)']
+  }
 ];
 
 const TechStack: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const categoryVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  } as any;
-
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Tech Stack</h2>
-      
-      <motion.div
-        className={styles.grid}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        {skillCategories.map((category, index) => (
-          <motion.div key={index} className={styles.category} variants={categoryVariants}>
-            <h3 className={styles.categoryTitle}>{category.category}</h3>
-            <ul className={styles.skillList}>
-              {category.skills.map((skill, skillIndex) => (
-                <li key={skillIndex} className={styles.skill}>
-                  {skill}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
+    <div className={styles.container}>
+      {techGroups.map((group, groupIndex) => (
+        <div key={group.name} className={styles.group}>
+          <h3 className={styles.groupTitle}>{group.name}</h3>
+          <div className={styles.grid}>
+            {group.items.map((tech, index) => (
+              <TechBadge key={tech} tech={tech} index={index + (groupIndex * 5)} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const TechBadge: React.FC<{ tech: string; index: number }> = ({ tech, index }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  // Subtle floating effect
+  const randomFactor = (index % 3) + 1;
+  const y = useTransform(scrollYProgress, [0, 1], [10 * randomFactor, -10 * randomFactor]);
+  
+  return (
+    <motion.div 
+      ref={ref}
+      className={styles.badge}
+      style={{ y }}
+      whileHover={{ 
+        scale: 1.05, 
+        backgroundColor: "var(--swe-text-brown)", 
+        color: "#FFFFFF",
+        borderColor: "var(--swe-text-brown)"
+      }}
+      transition={{ duration: 0.2 }}
+    >
+      {tech}
+    </motion.div>
   );
 };
 

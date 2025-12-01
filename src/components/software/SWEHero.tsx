@@ -1,79 +1,72 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from '../../styles/software/SWEHero.module.css';
-import profilePic from "../../assets/vjw-1-ps.jpg";
+import face from '../../assets/vjw-1-ps.jpg';
 
 const SWEHero: React.FC = () => {
-  const navigate = useNavigate();
-  
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-        staggerChildren: 0.1,
-      },
-    },
-  } as any;
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  } as any;
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
-    <motion.section
-      className={styles.hero}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+    <motion.section 
+      ref={ref}
+      className={styles.heroSection}
+      style={{ opacity, y }}
     >
-      <motion.button 
-        className={styles.backButton}
-        onClick={() => navigate('/')}
-        variants={itemVariants}
-        whileHover={{ x: -4 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        ← Back
-      </motion.button>
-      
-    <motion.div className={styles.profilePic} variants={itemVariants}>
-    <img
-        src={profilePic}
-        alt="Victor Wu"
-        className={styles.profileImage}
-    />
-    </motion.div>
+      <div className={styles.content}>
+        <motion.div 
+          className={styles.imageContainer}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className={styles.profileImageWrapper}>
+            <img src={face} alt="Profile" className={styles.profileImage} />
+          </div>
+        </motion.div>
 
-      
-      <motion.h1 className={styles.name} variants={itemVariants}>
-        Victor Wu
-      </motion.h1>
-      
-      <motion.p className={styles.tagline} variants={itemVariants}>
-        Software Engineer at Google
-      </motion.p>
-      
-      <motion.div className={styles.links} variants={itemVariants}>
-        <a href="https://drive.google.com/file/d/1vLk173MkB2Lh3E6X2K-uF8LAL7K6fI9-/view?usp=sharing" className={styles.link} target="_blank" rel="noopener noreferrer">
-          Resume
-        </a>
-        <a href="https://linkedin.com/in/victorjwuGT" className={styles.link} target="_blank" rel="noopener noreferrer">
-          LinkedIn
-        </a>
-        <a href="https://github.com/victorjwu" className={styles.link} target="_blank" rel="noopener noreferrer">
-          GitHub
-        </a>
-      </motion.div>
+        <motion.h1 
+          className={styles.title}
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Victor Wu
+        </motion.h1>
+        
+        <motion.p 
+          className={styles.subtitle}
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Software Engineer
+        </motion.p>
+
+        <motion.div 
+          className={styles.decorativeLine}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        />
+
+        <motion.div 
+          className={styles.links}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <a href="https://drive.google.com/file/d/1vLk173MkB2Lh3E6X2K-uF8LAL7K6fI9-/view?usp=sharing" target="_blank" rel="noopener noreferrer" className={styles.link}>Resume</a>
+          <a href="https://github.com/victorjwu" target="_blank" rel="noopener noreferrer" className={styles.link}>GitHub</a>
+          <a href="https://linkedin.com/in/victorjwuGT" target="_blank" rel="noopener noreferrer" className={styles.link}>LinkedIn</a>
+        </motion.div>
+      </div>
     </motion.section>
   );
 };

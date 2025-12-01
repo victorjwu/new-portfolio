@@ -3,85 +3,66 @@ import { motion } from 'framer-motion';
 import styles from '../../styles/software/ProjectsShowcase.module.css';
 
 interface Project {
+  id: number;
   title: string;
   description: string;
-  tags: string[];
-  imageColor: string;
+  techStack: string[];
+  link?: string;
 }
 
 const projects: Project[] = [
-  {
-    title: "Microsoft ABAC-CoPilot",
-    description: "Trained an NLP model to translate natural language prompts into JSON Attribute-Based Access Control (ABAC) security policies.",
-    tags: ["React", "Python", "TensorFlow"],
-    imageColor: "#853ebeff",
+    {
+    id: 1,
+    title: 'Microsoft ABAC CoPilot',
+    description: 'Trained an NLP model to translate natural language prompts into JSON Attribute-Based Access Control(ABAC) security policies. Won second place at Georgia Tech Junior Design Expo.',
+    techStack: ['Python', 'Flask', 'TensorFlow', 'Mistral AI', 'React'],
+    link: '#'
   },
   {
-    title: "mise",
-    description: "Building an application that applies sentiment analysis (DistilBERT) to Reddit threads and food blogs togenerate restaurant recommendations.",
-    tags: ["React", "Node.js", "PyTorch", "MongoDB"],
-    imageColor: "#c75bccff",
+    id: 2,
+    title: 'This Portfolio',
+    description: 'Working on this portfolio and designing it in Figma. ',
+    techStack: ['React', 'TypeScript', 'Framer Motion', 'Figma'],
+    link: 'https://github.com/victorjwu/new-portfolio'
   },
+  {
+    id: 3,
+    title: 'mise',
+    description: 'Building an application that applies sentiment analysis (DistilBERT) to Reddit threads and food blogs to generate restaurant recommendations.',
+    techStack: ['React', 'Node.js', 'MongoDB', 'DistilBERT'],
+    link: '#'
+  }
 ];
 
 const ProjectsShowcase: React.FC = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  } as any;
-
   return (
-    <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Projects</h2>
-      
-      <motion.div
-        className={styles.grid}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            className={styles.card}
-            variants={cardVariants}
-            whileHover={{ y: -4, transition: { duration: 0.2 } }}
-          >
-            <div className={styles.image} style={{ backgroundColor: project.imageColor }}>
-              <span className={styles.imagePlaceholder}>{project.title.charAt(0)}</span>
-            </div>
+    <div className={styles.grid}>
+      {projects.map((project, index) => (
+        <motion.a 
+          key={project.id}
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.card}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ y: -10 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className={styles.cardContent}>
+            <h3 className={styles.projectTitle}>{project.title}</h3>
+            <p className={styles.projectDescription}>{project.description}</p>
             
-            <div className={styles.cardContent}>
-              <h3 className={styles.title}>{project.title}</h3>
-              <p className={styles.description}>{project.description}</p>
-              
-              <div className={styles.tags}>
-                {project.tags.map((tag, tagIndex) => (
-                  <span key={tagIndex} className={styles.tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
+            <div className={styles.techStack}>
+              {project.techStack.map((tech) => (
+                <span key={tech} className={styles.techBadge}>{tech}</span>
+              ))}
             </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
+          </div>
+        </motion.a>
+      ))}
+    </div>
   );
 };
 
