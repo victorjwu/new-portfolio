@@ -16,13 +16,13 @@ const SoftwarePage: React.FC = () => {
   const [isExiting, setIsExiting] = useState(false);
   const navigate = useNavigate();
 
-  const sections = [
+  const sections = React.useMemo(() => [
     { id: 'about', label: 'about' },
     { id: 'experience', label: 'experience' },
     { id: 'education', label: 'education' },
     { id: 'projects', label: 'projects' },
     { id: 'skills', label: 'skills' },
-  ];
+  ], []);
 
   React.useEffect(() => {
     // Increase timer to cover the full duration of entrance animations
@@ -32,38 +32,27 @@ const SoftwarePage: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle wheel scroll to switch sections
+  // Keyboard navigation (keep this as it's useful and non-intrusive)
   React.useEffect(() => {
-    let isThrottled = false;
-
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault(); // Prevent native scroll
-      if (isThrottled) return;
-
-      if (Math.abs(e.deltaY) > 100) { // Doubled threshold (50 -> 100)
-        isThrottled = true;
-        
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         const currentIndex = sections.findIndex(s => s.id === activeSection);
-        if (e.deltaY > 0) {
-          // Scroll Down -> Next Section
-          if (currentIndex < sections.length - 1) {
-            setActiveSection(sections[currentIndex + 1].id);
-          }
-        } else {
-          // Scroll Up -> Previous Section
-          if (currentIndex > 0) {
-            setActiveSection(sections[currentIndex - 1].id);
-          }
+        if (currentIndex < sections.length - 1) {
+          setActiveSection(sections[currentIndex + 1].id);
         }
-
-        setTimeout(() => {
-          isThrottled = false;
-        }, 1000); // Keep debounce
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        const currentIndex = sections.findIndex(s => s.id === activeSection);
+        if (currentIndex > 0) {
+          setActiveSection(sections[currentIndex - 1].id);
+        }
       }
     };
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [activeSection, sections]);
 
   const renderSection = () => {

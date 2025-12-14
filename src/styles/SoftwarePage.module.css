@@ -1,11 +1,10 @@
 .pageContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   display: flex;
-  overflow: hidden;
+  overflow-y: auto; /* Allow scanning of full page content */
+  overflow-x: hidden;
   color: #ffffff;
   font-family: 'Inter', sans-serif;
 }
@@ -211,9 +210,12 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .pageContainer {
     flex-direction: column;
+    height: 100vh; /* Constrain to viewport */
+    min-height: 0;
+    /* overflow-y: auto is already set on base class */
   }
   
   .leftColumn {
@@ -221,11 +223,15 @@
     height: auto;
     padding: 30px;
     padding-bottom: 0;
-    gap: 30px;
+    gap: 30px; /* Keep existing gap from 1024px media query */
   }
- 
+  
   .headerContainer {
-    margin-bottom: 0;
+    margin-bottom: 0; /* Keep existing margin-bottom from 1024px media query */
+  }
+  
+  .headerName {
+    margin-bottom: 30px;
   }
   
   .nav {
@@ -238,6 +244,7 @@
   .rightColumn {
     padding: 30px;
     justify-content: flex-start;
+    overflow: visible; /* Ensure content isn't clipped */
   }
   
   .sectionContent {
@@ -246,5 +253,9 @@
 
   .navItem {
     font-size: 18px;
+  }
+
+  .activeNav::before {
+    display: none; /* Hide dot on mobile as it might fit badly */
   }
 }
