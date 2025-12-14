@@ -2,11 +2,11 @@
 
 ### TODO
 
-- Redesign the Software Engineer page to be more in theme
 - Design the Art + Creative Page
 
 - Design Logo
 
+- Extend video to make it loop cleaner
 
 #### Known Bugs
 - Zooming in causes an issue with the cursor

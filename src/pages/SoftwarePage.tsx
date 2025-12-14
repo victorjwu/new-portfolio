@@ -13,6 +13,7 @@ import {
 const SoftwarePage: React.FC = () => {
   const [activeSection, setActiveSection] = useState('about');
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
   const navigate = useNavigate();
 
   const sections = [
@@ -140,13 +141,25 @@ const SoftwarePage: React.FC = () => {
 
   return (
     <div className={styles.pageContainer}>
+      {/* Exit Overlay */}
+      <motion.div
+        className={styles.exitOverlay}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isExiting ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+      />
       {/* ... (wrapper) */}
       <div className={styles.overlay} />
 
       <div className={styles.leftColumn}>
         <div className={styles.backButtonWrapper}>
           <motion.button 
-            onClick={() => navigate('/', { state: { skipTransition: true } })} 
+            onClick={() => {
+              setIsExiting(true);
+              setTimeout(() => {
+                navigate('/', { state: { skipTransition: true } });
+              }, 800);
+            }} 
             className={styles.backButton}
             variants={backButtonVariants}
             initial="hidden"
