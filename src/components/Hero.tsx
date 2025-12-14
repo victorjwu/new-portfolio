@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion, type Variants } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import VideoBackground from './VideoBackground';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from '../styles/Hero.module.css';
 
 const Hero: React.FC = () => {
@@ -15,9 +14,13 @@ const Hero: React.FC = () => {
       transition: {
         duration: 1.5,
         ease: "easeInOut",
-        delay: 3.2, // Start sliding up after rejoin is done
+        delay: 2.2, // Speed up: 3.2 -> 2.2
       },
     },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.5 }
+    }
   };
 
   // 2. Left Word "VICTOR" (Fade in with blur)
@@ -54,9 +57,10 @@ const Hero: React.FC = () => {
       transition: {
         duration: 1.5,
         ease: "easeInOut",
-        delay: 3.2, // Sync with slide up
+        delay: 2.2, // Speed up: 3.2 -> 2.2
       },
     },
+    exit: { opacity: 0, transition: { duration: 0.5 } }
   };
 
   // 5. Subline Animation
@@ -68,9 +72,10 @@ const Hero: React.FC = () => {
       transition: {
         duration: 0.8,
         ease: "easeOut",
-        delay: 4.5,
+        delay: 3.5, // Speed up: 4.5 -> 3.5
       },
     },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3 } }
   };
 
   // 6. Buttons Animation
@@ -82,7 +87,7 @@ const Hero: React.FC = () => {
       transition: {
         duration: 0.8,
         ease: "easeOut",
-        delay: 4.8 + custom * 0.1,
+        delay: 3.8 + custom * 0.1, // Speed up: 4.8 -> 3.8
       },
     }),
     hover: { 
@@ -90,7 +95,8 @@ const Hero: React.FC = () => {
       y: -2,
       transition: { duration: 0.2 }
     },
-    tap: { scale: 0.95 }
+    tap: { scale: 0.95 },
+    exit: { opacity: 0, y: 20, transition: { duration: 0.3 } }
   };
 
   const handleSWEClick = () => {
@@ -103,23 +109,21 @@ const Hero: React.FC = () => {
 
   return (
     <section className={styles.hero}>
-      <VideoBackground />
-      
-      {/* Black Curtain Overlay */}
       <motion.div 
         className={styles.overlay}
         style={{ backgroundColor: '#000', zIndex: 1 }}
         variants={curtainVariants}
         initial="hidden"
         animate="visible"
+        exit="exit"
       />
-      
       <div className={styles.content}>
         <motion.h1 
           className={styles.name} 
           variants={nameContainerVariants}
           initial="hidden"
           animate="visible"
+          exit="exit"
         >
           <motion.span variants={leftWordVariants} style={{ display: 'inline-block' }}>VICTOR</motion.span>
           {" "}
@@ -131,6 +135,7 @@ const Hero: React.FC = () => {
           variants={sublineVariants}
           initial="hidden"
           animate="visible"
+          exit="exit"
         >
           Everything I've been working on lately...
           <br />
@@ -144,6 +149,7 @@ const Hero: React.FC = () => {
             custom={0}
             initial="hidden"
             animate="visible"
+            exit="exit"
             whileHover="hover"
             whileTap="tap"
             onClick={handleSWEClick}
@@ -158,6 +164,7 @@ const Hero: React.FC = () => {
             custom={1}
             initial="hidden"
             animate="visible"
+            exit="exit"
             whileHover="hover"
             whileTap="tap"
             onClick={handleCreativeClick}

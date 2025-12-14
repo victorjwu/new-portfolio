@@ -1,16 +1,19 @@
 
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import Hero from './components/Hero';
 import BubbleCursor from './components/BubbleCursor';
 import SoftwarePage from './pages/SoftwarePage';
+import VideoBackground from './components/VideoBackground';
 import './styles/global.css';
 
-function App() {
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  
   return (
-    <Router>
-      <BubbleCursor />
-      <Routes>
+    <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Hero />} />
         <Route path="/software" element={<SoftwarePage />} />
         {/* 
@@ -18,6 +21,16 @@ function App() {
           <Route path="/creative" element={<CreativePage />} />
         */}
       </Routes>
+    </AnimatePresence>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <VideoBackground />
+      <BubbleCursor />
+      <AnimatedRoutes />
     </Router>
   );
 }
