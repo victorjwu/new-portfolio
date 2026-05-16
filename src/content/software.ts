@@ -104,10 +104,10 @@ export const STACK: StackColumn[] = [
   },
   {
     label: "Infra",
-    items: ["AWS", "Lambda", "PostgreSQL", "MongoDB", "Vercel"],
+    items: ["AWS", "Lambda", "PostgreSQL", "MongoDB", "Vercel", "Supabase"],
   },
   {
     label: "Tools",
-    items: ["Figma", "Cursor", "Git", "Linear", "Notion"],
+    items: ["Claude Code", "Gemini", "Git", "Figma", "Notion"],
   },
 ];

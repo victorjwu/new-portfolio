@@ -1,14 +1,25 @@
 import { useEffect } from "react";
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import Photo from "../components/Photo";
 import PhotoPlaceholder from "../components/PhotoPlaceholder";
 import DesignPlaceholder from "../components/DesignPlaceholder";
+import SectionRail from "../components/SectionRail";
 import { useReveal } from "../hooks/useReveal";
+import { useMicroFx } from "../hooks/useMicroFx";
 import { PHOTOS, DESIGN_WORK, SOCIALS } from "../content/art";
 import styles from "./ArtPage.module.css";
 
+const RAIL_ITEMS = [
+  { id: "hero", num: "01", label: "Intro" },
+  { id: "photography", num: "02", label: "Photography" },
+  { id: "design", num: "03", label: "Design" },
+  { id: "elsewhere", num: "04", label: "Elsewhere" },
+];
+
 export default function ArtPage() {
   useReveal();
+  useMicroFx();
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
@@ -16,38 +27,39 @@ export default function ArtPage() {
   return (
     <div className="page">
       <Nav />
+      <SectionRail items={RAIL_ITEMS} />
       <main className={`wrap ${styles.main}`}>
         {/* Hero */}
-        <section className={`${styles.hero} reveal`}>
-          <div className={styles.eyebrow}>ART &amp; CREATIVE / 2020 — 2025</div>
+        <section id="hero" className={`${styles.hero} reveal`}>
+          <div className={styles.eyebrow}>ART &amp; CREATIVE / 2025 — 2026</div>
           <h1 className={styles.h1}>
-            Photographs, prints, and <em>quiet design</em>
+            Photographs and <em>quiet design</em>
             <br />
             for things I love.
           </h1>
           <div className={styles.heroSub}>
             <p className={styles.heroLede}>
-              Quiet visual work — photographs from slow walks through Japan, marks for
-              small things, and the occasional piece of furniture I haven't shipped yet.
-              I work mostly on 35mm and in Figma.
+              Quiet visual work — photographs from places I've traveled to,
+              marks for small things, and the occasional piece of furniture I
+              haven't shipped yet.
             </p>
             <p className={styles.heroMeta}>
-              Selected work below. Photo grid is a small subset — full sets live on
-              Instagram. Reach out if you want prints.
+              Selected work below. Photo grid is a small subset — full sets will
+              live on Instagram.
             </p>
           </div>
         </section>
 
         {/* Photography */}
-        <section className={styles.section}>
+        <section id="photography" className={styles.section}>
           <div className={`${styles.head} reveal`}>
-            <div className={styles.eyebrowMute}>Photography — Selected</div>
+            <div className={styles.eyebrowMute}>Photography</div>
             <h2 className={styles.h2}>
-              <em>Spring,</em> Japan — a slow walk through quiet streets.
+              Photography with a focus on <em>compositoin</em>
             </h2>
           </div>
           <div className={`${styles.grid} reveal`}>
-            {PHOTOS.map((p) => (
+            {PHOTOS.map((p, i) => (
               <div
                 key={p.id}
                 className={styles.cell}
@@ -55,47 +67,77 @@ export default function ArtPage() {
                   gridColumn: `span ${p.span.col}`,
                   gridRow: `span ${p.span.row}`,
                 }}
+                data-tilt="2.5"
               >
-                {p.real ? (
-                  <>
-                    <img className={styles.cellImg} src={p.real} alt={p.cap} />
-                    <span className={`${styles.cap} ${styles.capLight}`}>{p.cap}</span>
-                    <span className={`${styles.idTag} ${styles.capLight}`}>{p.id}</span>
-                  </>
-                ) : (
-                  <>
-                    <PhotoPlaceholder seed={p.seed ?? 0} cap={p.cap} id={p.id} />
-                  </>
-                )}
+                <div
+                  className={styles.cellInner}
+                  data-parallax={6 + (i % 3) * 2}
+                >
+                  {p.real ? (
+                    <>
+                      <Photo
+                        src={p.real}
+                        alt={p.cap}
+                        priority={i < 2}
+                        className={styles.cellPicture}
+                        imgClassName={styles.cellImg}
+                      />
+                      <span className={`${styles.cap} ${styles.capLight}`}>
+                        {p.cap}
+                      </span>
+                      <span className={`${styles.idTag} ${styles.capLight}`}>
+                        {p.id}
+                      </span>
+                    </>
+                  ) : (
+                    <PhotoPlaceholder
+                      seed={p.seed ?? 0}
+                      cap={p.cap}
+                      id={p.id}
+                    />
+                  )}
+                </div>
               </div>
             ))}
           </div>
           <div className={styles.gridFoot}>
-            <span>SHOT ON · CONTAX T2 / KODAK PORTRA 400</span>
-            <a className={styles.gridFootLink} href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              FULL SET — INSTAGRAM @VICTORWU.FILM →
+            <span>SHOT ON · FUJIFILM X100VI / Film Sim : KODAK PORTRA 400</span>
+            <a
+              className={`${styles.gridFootLink} tactile-soft`}
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FULL SET — INSTAGRAM @vjwuphotos →
             </a>
           </div>
         </section>
 
         {/* Design */}
-        <section className={styles.section}>
+        <section id="design" className={styles.section}>
           <div className={`${styles.head} reveal`}>
-            <div className={styles.eyebrowMute}>Design — Selected</div>
+            <div className={styles.eyebrowMute}>Design</div>
             <h2 className={styles.h2}>
-              Identity, editorial, and <em>the occasional</em> piece of furniture.
+              Ineterior design and the <em>occasional</em> UI work
             </h2>
           </div>
           <div className={`${styles.designGrid} reveal-stagger`}>
             {DESIGN_WORK.map((d, i) => (
-              <article key={d.title} className={styles.designCard}>
-                <div className={styles.designMedia}>
-                  <DesignPlaceholder index={i} label={`PROJECT 0${i + 1}`} />
-                </div>
-                <div className={styles.designBody}>
-                  <div className={styles.designYear}>{d.year}</div>
-                  <div className={styles.designTitle}>{d.title}</div>
-                  <div className={styles.designDesc}>{d.desc}</div>
+              <article
+                key={d.title}
+                className={`${styles.designCard} tactile-soft`}
+                data-spotlight
+                data-tilt="2"
+              >
+                <div className={styles.designInner}>
+                  <div className={styles.designMedia}>
+                    <DesignPlaceholder index={i} label={`PROJECT 0${i + 1}`} />
+                  </div>
+                  <div className={styles.designBody}>
+                    <div className={styles.designYear}>{d.year}</div>
+                    <div className={styles.designTitle}>{d.title}</div>
+                    <div className={styles.designDesc}>{d.desc}</div>
+                  </div>
                 </div>
               </article>
             ))}
@@ -103,7 +145,7 @@ export default function ArtPage() {
         </section>
 
         {/* Elsewhere */}
-        <section className={styles.section}>
+        <section id="elsewhere" className={styles.section}>
           <div className={`${styles.head} reveal`}>
             <div className={styles.eyebrowMute}>Elsewhere</div>
             <h2 className={styles.h2}>
@@ -117,7 +159,7 @@ export default function ArtPage() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.social}
+                className={`${styles.social} tactile-soft`}
               >
                 <span className={styles.socialArrow}>↗</span>
                 <div className={styles.socialPlatform}>{s.platform}</div>

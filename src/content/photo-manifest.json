@@ -1,0 +1,74 @@
+{
+  "/assets/photos/boston-commons.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 0.6667,
+    "width": 2000
+  },
+  "/assets/photos/hawaii-one.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.7747,
+    "width": 2000
+  },
+  "/assets/photos/kyodo-station.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.5001,
+    "width": 2000
+  },
+  "/assets/photos/meydenbauer.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.5,
+    "width": 2000
+  },
+  "/assets/photos/mom-hawaii.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.7739,
+    "width": 2000
+  },
+  "/assets/photos/phone-booth.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 0.6667,
+    "width": 2000
+  },
+  "/assets/photos/roosevelt-island.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.3333,
+    "width": 2000
+  },
+  "/assets/photos/sf-bridge.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.5,
+    "width": 2000
+  },
+  "/assets/photos/shinjuku.jpg": {
+    "formats": [
+      "webp",
+      "avif"
+    ],
+    "aspectRatio": 1.5,
+    "width": 2000
+  }
+}

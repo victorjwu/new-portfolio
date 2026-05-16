@@ -21,8 +21,26 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide native cursor on devices where we render our own dot. Touch / coarse
+   pointers fall through to default behavior. */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}
+
 #root {
   min-height: 100vh;
+  position: relative;
+  z-index: 2;
 }
 
 a {
@@ -49,6 +67,7 @@ em {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
+  color: var(--clay);
 }
 
 ::selection {
@@ -63,24 +82,23 @@ em {
 }
 
 .page {
-  animation: fadeup 0.7s var(--ease) both;
+  animation: page-in 0.55s var(--ease-out) both;
 }
 
-@keyframes fadeup {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* opacity-only — leaving a non-none transform on .page (even translateY(0))
+   would make it the containing block for position:fixed descendants like
+   SectionRail, breaking viewport-anchored layout. */
+@keyframes page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
+
+/* ---------- Reveals (tighter timing, punchier curves) ---------- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  transform: translateY(14px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
 }
 
 .reveal.in {
@@ -90,8 +108,8 @@ em {
 
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transform: translateY(14px);
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
 }
 
 .reveal-stagger.in > * {
@@ -100,9 +118,70 @@ em {
 }
 
 .reveal-stagger.in > *:nth-child(1) { transition-delay: 0s; }
-.reveal-stagger.in > *:nth-child(2) { transition-delay: 0.08s; }
-.reveal-stagger.in > *:nth-child(3) { transition-delay: 0.16s; }
-.reveal-stagger.in > *:nth-child(4) { transition-delay: 0.24s; }
-.reveal-stagger.in > *:nth-child(5) { transition-delay: 0.32s; }
-.reveal-stagger.in > *:nth-child(6) { transition-delay: 0.4s; }
-.reveal-stagger.in > *:nth-child(n + 7) { transition-delay: 0.48s; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: 0.30s; }
+.reveal-stagger.in > *:nth-child(n + 7) { transition-delay: 0.36s; }
+
+/* clip-path mask reveal — variant for headlines */
+.reveal-mask {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.85s var(--ease-out);
+}
+.reveal-mask.in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- Tactile press (universal scale-down on press) ---------- */
+
+.tactile,
+.tactile-soft {
+  transition-property: transform, color, background-color, border-color, box-shadow, opacity;
+  transition-duration: 220ms;
+  transition-timing-function: var(--ease-out);
+}
+
+.tactile:active {
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+
+.tactile-soft:active {
+  transform: scale(0.985);
+  transition-duration: 80ms;
+}
+
+/* ---------- Scroll progress hairline (in Nav) ---------- */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: calc(var(--z-nav) + 1);
+  pointer-events: none;
+}
+
+.scroll-progress::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--scroll, 0%);
+  background: var(--clay);
+  transform-origin: left center;
+  transition: width 60ms linear;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}

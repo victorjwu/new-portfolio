@@ -8,19 +8,25 @@
   --rule: #c8c8b8;
   --rule-soft: #d8d7c8;
   --clay: #8a6c4a;
+  --clay-soft: #b08968;
   --moss: #4a5e44;
-  --moss-soft: #6f8067;
-  --sage-glow: #b9c9a7;
 
   --font-sans: "Hanken Grotesk", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: "Instrument Serif", "Iowan Old Style", "Georgia", serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
+  /* original gentle ease — used across components and reveal animations */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* punchier curve for new interactions (hovers, presses) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
   --wrap: 1280px;
   --gutter: 40px;
   --section-pad: 96px;
+
+  --z-grain: 1;
+  --z-rail: 18;
+  --z-nav: 30;
 }
 
 @media (max-width: 860px) {

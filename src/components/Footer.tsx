@@ -6,8 +6,8 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.left}>
           <div className={styles.eyebrow}>Get in touch</div>
-          <a className={styles.mail} href="mailto:victorwu689@gmail.com">
-            victor<em>wu</em>689@gmail.com
+          <a className={styles.mail} href="mailto:hi@gmail.com">
+            hi@victorjwu.com
           </a>
         </div>
         <div className={styles.right}>© 2025 V.WU — SAN FRANCISCO</div>
