@@ -1,0 +1,258 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  color: #f5f3eb;
+  isolation: isolate;
+}
+
+.bg {
+  position: absolute;
+  inset: -4%;
+  background-image: url("/assets/hero-tokyo.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 18, 15, 0.22) 0%,
+    rgba(20, 18, 15, 0.08) 30%,
+    rgba(20, 18, 15, 0.55) 100%
+  );
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1.02) translate(0, 0);
+  }
+  to {
+    transform: scale(1.12) translate(-1.5%, 1.5%);
+  }
+}
+
+.frame {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 48px 36px;
+}
+
+.topChrome,
+.bottomChrome {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  animation: fadein 1s var(--ease) 1.4s both;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 30px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  opacity: 0;
+  animation: fadein 1.2s var(--ease) 0.8s forwards;
+}
+
+.name {
+  font-size: clamp(72px, 11vw, 168px);
+  font-weight: 200;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.22);
+  display: inline-flex;
+  white-space: pre;
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterIn 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes letterIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.sub {
+  font-size: clamp(15px, 1.35vw, 19px);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  line-height: 1.55;
+  max-width: 520px;
+  opacity: 0;
+  animation: fadein 1s var(--ease) 1.1s forwards;
+}
+
+.sub em {
+  opacity: 0.85;
+}
+
+.ctas {
+  display: flex;
+  gap: 14px;
+  margin-top: 6px;
+  opacity: 0;
+  animation: fadein 1s var(--ease) 1.3s forwards;
+}
+
+.cta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-width: 320px;
+  padding: 18px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #f5f3eb;
+  overflow: hidden;
+  transition: transform 0.5s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--paper);
+  transform: translateY(101%);
+  transition: transform 0.5s var(--ease);
+  z-index: -1;
+}
+
+.cta:hover {
+  color: var(--ink);
+  border-color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.cta:hover::before {
+  transform: translateY(0);
+}
+
+.ctaArrow {
+  font-size: 14px;
+  transition: transform 0.4s var(--ease);
+}
+
+.cta:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+.bottomChrome {
+  align-items: flex-end;
+}
+
+.now,
+.clock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.clock {
+  text-align: right;
+}
+
+.nowLabel {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.26em;
+  opacity: 0.6;
+}
+
+.nowValue {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  animation: rotateIn 0.55s var(--ease);
+}
+
+.clockValue {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadein {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 860px) {
+  .frame {
+    padding: 24px;
+  }
+  .ctas {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .cta {
+    min-width: 0;
+    width: 100%;
+  }
+}

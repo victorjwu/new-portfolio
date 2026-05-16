@@ -1,38 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import SoftwarePage from "./pages/SoftwarePage";
+import ArtPage from "./pages/ArtPage";
 
-
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Hero from './components/Hero';
-import BubbleCursor from './components/BubbleCursor';
-import SoftwarePage from './pages/SoftwarePage';
-import VideoBackground from './components/VideoBackground';
-import './styles/global.css';
-
-const AnimatedRoutes = () => {
-  const location = useLocation();
-  
+export default function App() {
   return (
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Hero />} />
-        <Route path="/software" element={<SoftwarePage />} />
-        {/* 
-          Placeholder routes for future implementation:
-          <Route path="/creative" element={<CreativePage />} />
-        */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/software-engineering" element={<SoftwarePage />} />
+        <Route path="/art-creative" element={<ArtPage />} />
       </Routes>
-    </AnimatePresence>
-  );
-};
-
-function App() {
-  return (
-    <Router>
-      <VideoBackground />
-      <BubbleCursor />
-      <AnimatedRoutes />
-    </Router>
+    </BrowserRouter>
   );
 }
-
-export default App;
